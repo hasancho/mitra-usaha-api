@@ -44,4 +44,63 @@ const addDataKaryawan = (req, res) => {
     });
 };
 
-module.exports = { getDataKaryawan, addDataKaryawan };
+const updateDataKaryawan = (req, res) => {
+  const {
+    nip,
+    nik,
+    nama,
+    alamat,
+    status_karyawan,
+    status_pernikahan,
+    tanggal_masuk,
+    gaji,
+    id,
+  } = req.body;
+  pool
+    .query(queryKaryawan.updateDataKaryawan, [
+      nip,
+      nik,
+      nama,
+      alamat,
+      status_karyawan,
+      status_pernikahan,
+      tanggal_masuk,
+      gaji,
+      id,
+    ])
+    .then((result) => {
+      return res.status(200).json({
+        message: 'successed to update data',
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        message: 'failed to update data',
+      });
+    });
+};
+
+const deleteDataKaryawan = (req, res) => {
+  const { id } = req.params;
+  pool
+    .query(queryKaryawan.deleteDataKaryawan, [id])
+    .then((result) => {
+      return res.status(200).json({
+        message: 'successed to delete data',
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        message: 'failed to delete data',
+      });
+    });
+};
+
+module.exports = {
+  getDataKaryawan,
+  addDataKaryawan,
+  updateDataKaryawan,
+  deleteDataKaryawan,
+};

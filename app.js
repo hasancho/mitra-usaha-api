@@ -7,7 +7,7 @@ const appRoutes = require('./src/routes/routes');
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/app', appRoutes);
+app.use('/', appRoutes);
 app.listen(process.env.PORT, () => {
   console.log('App listening on port ' + process.env.PORT);
 });
