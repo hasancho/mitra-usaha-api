@@ -14,6 +14,22 @@ const getDataCustomer = (req, res) => {
     });
 };
 
+const getDataCustomerById = (req, res) => {
+  const { id } = req.params;
+  pool
+    .query(queryCustomer.getDataCustomerById, [id])
+    .then((result) => {
+      console.log(result);
+      return res.status(200).json(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res
+        .status(500)
+        .json({ message: 'Failed to get data customer by id' });
+    });
+};
+
 const addDataCustomer = (req, res) => {
   const { npwp, nama, alamat, no_telepon } = req.body;
   pool
@@ -66,7 +82,7 @@ const deleteDataCustomer = (req, res) => {
         message: 'successed to delete customer',
       });
     })
-    .then((err) => {
+    .catch((err) => {
       console.log(err);
       return res.status(500).json({ message: 'failed to delete customer' });
     });
@@ -74,6 +90,7 @@ const deleteDataCustomer = (req, res) => {
 
 module.exports = {
   getDataCustomer,
+  getDataCustomerById,
   addDataCustomer,
   updateDataCustomer,
   deleteDataCustomer,

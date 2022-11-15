@@ -8,9 +8,9 @@ const getDataKendaraan = (req, res) => {
       console.log(result);
       return res.status(200).json(result.rows);
     })
-    .then((err) => {
+    .catch((err) => {
       console.log(err);
-      res.status(500).json({ message: 'failed to get data kendaraan' });
+      return res.status(500).json({ message: 'failed to get data kendaraan' });
     });
 };
 

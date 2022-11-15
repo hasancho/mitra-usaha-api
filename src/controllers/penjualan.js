@@ -65,7 +65,7 @@ const updateDataPenjualan = (req, res) => {
   } = req.body;
 
   pool
-    .query(queryPenjualan.insertDataPenjualan, [
+    .query(queryPenjualan.updateDataPenjualan, [
       no_do,
       quantity,
       pembayaran,

@@ -1,4 +1,5 @@
 const getDataCustomer = 'SELECT * FROM customer';
+const getDataCustomerById = 'SELECT * FROM customer WHERE id = $1';
 const insertDataCustomer =
   'INSERT INTO customer (npwp, nama, alamat, no_telepon) values ($1, $2, $3, $4)';
 const updateDataCustomer =
@@ -7,6 +8,7 @@ const deleteDataCustomer = 'DELETE FROM customer WHERE id = $1';
 
 module.exports = {
   getDataCustomer,
+  getDataCustomerById,
   insertDataCustomer,
   updateDataCustomer,
   deleteDataCustomer,
