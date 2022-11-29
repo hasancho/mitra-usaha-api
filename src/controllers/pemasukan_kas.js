@@ -20,7 +20,7 @@ const getDataPemasukanKas = (req, res) => {
 };
 
 const addDataPemasukanKas = (req, res) => {
-  const { tanggal, keterangan, file, total_pemasukan_kas } = req.body;
+  const { tanggal, keterangan, total_pemasukan_kas } = req.body;
   pool
     .query(queryPemasukanKas.insertDataPemasukanKas, [
       tanggal,
@@ -43,12 +43,11 @@ const addDataPemasukanKas = (req, res) => {
 };
 
 const updateDataPemasukanKas = (req, res) => {
-  const { tanggal, keterangan, file, total_pemasukan_kas, id } = req.body;
+  const { tanggal, keterangan, total_pemasukan_kas, id } = req.body;
   pool
     .query(queryPemasukanKas.updateDataPemasukanKas, [
       tanggal,
       keterangan,
-      file,
       total_pemasukan_kas,
       id,
     ])

@@ -8,6 +8,8 @@ const controllerPengiriman = require('../controllers/pengiriman');
 const controllerPenjualan = require('../controllers/penjualan');
 const controllerPemasukanKas = require('../controllers/pemasukan_kas');
 const controllerPengeluaranKas = require('../controllers/pengeluaran_kas');
+const controllerLaporan = require('../controllers/laporan');
+const controllerUser = require('../controllers/user');
 
 router.get('/karyawan', controllerKaryawan.getDataKaryawan);
 router.post('/karyawan', controllerKaryawan.addDataKaryawan);
@@ -47,6 +49,11 @@ router.delete(
   '/pengeluaran_kas/:id',
   controllerPengeluaranKas.deleteDataPengeluaranKas
 );
-router.post('/uploads/');
+router.get('/laporan/sum-penjualan', controllerLaporan.sumPenjualan);
+router.post('/laporan-pemasukan', controllerLaporan.getPemasukanRangeDate);
+router.post('/laporan-pengeluaran', controllerLaporan.getPengeluaranRangeDate);
+router.post('/laporan-penjualan', controllerLaporan.getPenjualanRangeDate);
+router.post('/sign-up', controllerUser.signupUser);
+router.post('/login', controllerUser.loginUser);
 
 module.exports = router;
