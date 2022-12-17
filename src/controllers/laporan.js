@@ -13,6 +13,32 @@ const sumPenjualan = (req, res) => {
     });
 };
 
+const sumPemasukanKas = (req, res) => {
+  pool
+    .query(queryLaporan.sumPemasukanKas)
+    .then((result) => {
+      res.status(200).json(result.rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ message: 'failed to get sum data pemasukan kas' });
+    });
+};
+
+const sumPengeluaranKas = (req, res) => {
+  pool
+    .query(queryLaporan.sumPengeluaranKas)
+    .then((result) => {
+      res.status(200).json(result.rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res
+        .status(500)
+        .json({ message: 'failed to get sum data pengeluaran kas' });
+    });
+};
+
 const sumLaba = (req, res) => {
   pool.query(queryLaporan.sumLaba).then((result) => {
     res.status(200).json(result.rows);
@@ -33,6 +59,22 @@ const getPemasukanRangeDate = (req, res) => {
     });
 };
 
+const getTotalPemasukanRangeDate = (req, res) => {
+  const { from_tanggal, to_tanggal } = req.body;
+  pool
+    .query(queryLaporan.getTotalPemasukanRangeDate, [from_tanggal, to_tanggal])
+    .then((result) => {
+      console.log(result);
+      return res.status(200).json(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res
+        .status(500)
+        .json({ message: 'Failed to get total data pemasukan' });
+    });
+};
+
 const getPengeluaranRangeDate = (req, res) => {
   const { from_tanggal, to_tanggal } = req.body;
   pool
@@ -47,13 +89,48 @@ const getPengeluaranRangeDate = (req, res) => {
     });
 };
 
-const getPenjualanRangeDate = (req, res) => {
-  const { from_updated_at, to_updated_at } = req.body;
+const getTotalPengeluaranRangeDate = (req, res) => {
+  const { from_tanggal, to_tanggal } = req.body;
   pool
-    .query(queryLaporan.getDataPenjualanRangeDate, [
-      from_updated_at,
-      to_updated_at,
+    .query(queryLaporan.getTotalPengeluaranRangeDate, [
+      from_tanggal,
+      to_tanggal,
     ])
+    .then((result) => {
+      console.log(result);
+      return res.status(200).json(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res
+        .status(500)
+        .json({ message: 'Failed to get total data pengeluaran' });
+    });
+};
+
+const getPenjualanRangeDate = (req, res) => {
+  const { from_tanggal, to_tanggal } = req.body;
+  pool
+    .query(queryLaporan.getDataPenjualanRangeDate, [from_tanggal, to_tanggal])
+    .then((result) => {
+      console.log(result);
+      return res.status(200).json(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({ message: 'Failed to get data' });
+    });
+};
+
+const getTotalPenjualanRangeDate = (req, res) => {
+  const { from_tanggal, to_tanggal } = req.body;
+  pool
+    .query(
+      `select sum(penjualan_sebelum_pajak) as penjualan_sebelum_pajak, sum(penjualan_sesudah_pajak) as penjualan_sesudah_pajak from penjualan 
+    where 
+      tanggal >= $1 and  tanggal < $2 `,
+      [from_tanggal, to_tanggal]
+    )
     .then((result) => {
       console.log(result);
       return res.status(200).json(result.rows);
@@ -66,8 +143,13 @@ const getPenjualanRangeDate = (req, res) => {
 
 module.exports = {
   sumPenjualan,
+  sumPemasukanKas,
+  sumPengeluaranKas,
   sumLaba,
   getPemasukanRangeDate,
   getPengeluaranRangeDate,
   getPenjualanRangeDate,
+  getTotalPenjualanRangeDate,
+  getTotalPemasukanRangeDate,
+  getTotalPengeluaranRangeDate,
 };

@@ -15,13 +15,14 @@ const getDataPengiriman = (req, res) => {
 };
 
 const addDataPengiriman = (req, res) => {
-  const { tujuan, tarif, biaya_pokok, material } = req.body;
+  const { kode_tujuan, tujuan, tarif, biaya_pokok, komisi } = req.body;
   pool
     .query(queryPengiriman.insertDataPengiriman, [
+      kode_tujuan,
       tujuan,
       tarif,
       biaya_pokok,
-      material,
+      komisi,
     ])
     .then((result) => {
       console.log(result);
@@ -34,13 +35,14 @@ const addDataPengiriman = (req, res) => {
 };
 
 const updateDataPengiriman = (req, res) => {
-  const { tujuan, tarif, biaya_pokok, material, id } = req.body;
+  const { kode_tujuan, tujuan, tarif, biaya_pokok, komisi, id } = req.body;
   pool
     .query(queryPengiriman.updateDataPengiriman, [
+      kode_tujuan,
       tujuan,
       tarif,
       biaya_pokok,
-      material,
+      komisi,
       id,
     ])
     .then((result) => {

@@ -1,4 +1,4 @@
-const getDataPemasukanKas = 'SELECT * FROM pemasukan_kas';
+const getDataPemasukanKas = 'SELECT p.* FROM pemasukan_kas p';
 const insertDataPemasukanKas =
   'INSERT INTO pemasukan_kas (tanggal, keterangan, total_pemasukan_kas) values ($1, $2, $3)';
 const updateDataPemasukanKas =

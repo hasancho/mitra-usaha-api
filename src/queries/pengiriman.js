@@ -1,8 +1,8 @@
-const getDataPengiriman = 'SELECT * FROM pengiriman';
+const getDataPengiriman = `SELECT * FROM pengiriman`;
 const insertDataPengiriman =
-  'INSERT INTO pengiriman (tujuan, tarif, biaya_pokok, material) values ($1, $2, $3, $4)';
+  'INSERT INTO pengiriman (kode_tujuan, tujuan, tarif, biaya_pokok, komisi) values ($1, $2, $3, $4, $5)';
 const updateDataPengiriman =
-  'UPDATE pengiriman SET tujuan = $1, tarif = $2, biaya_pokok = $3, material = $4 where id = $5';
+  'UPDATE pengiriman SET kode_tujuan = $1, tujuan = $2, tarif = $3, biaya_pokok = $4, komisi = $5 where id = $6';
 const deleteDataPengiriman = 'DELETE FROM pengiriman WHERE id = $1';
 
 module.exports = {

@@ -25,7 +25,6 @@ const addDataPemasukanKas = (req, res) => {
     .query(queryPemasukanKas.insertDataPemasukanKas, [
       tanggal,
       keterangan,
-      file,
       total_pemasukan_kas,
     ])
     .then((result) => {

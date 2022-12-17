@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 
+const authMiddleware = require('../middlewares/auth');
 const controllerKaryawan = require('../controllers/karyawan');
 const controllerCustomer = require('../controllers/customer');
 const controllerKendaraan = require('../controllers/kendaraan');
@@ -15,7 +16,7 @@ router.get('/karyawan', controllerKaryawan.getDataKaryawan);
 router.post('/karyawan', controllerKaryawan.addDataKaryawan);
 router.put('/karyawan', controllerKaryawan.updateDataKaryawan);
 router.delete('/karyawan/:id', controllerKaryawan.deleteDataKaryawan);
-router.get('/customer', controllerCustomer.getDataCustomer);
+router.get('/customer', authMiddleware, controllerCustomer.getDataCustomer);
 router.get('/customer/:id', controllerCustomer.getDataCustomerById);
 router.post('/customer', controllerCustomer.addDataCustomer);
 router.put('/customer', controllerCustomer.updateDataCustomer);
@@ -50,10 +51,27 @@ router.delete(
   controllerPengeluaranKas.deleteDataPengeluaranKas
 );
 router.get('/laporan/sum-penjualan', controllerLaporan.sumPenjualan);
+router.get('/laporan/sum-pemasukan-kas', controllerLaporan.sumPemasukanKas);
+router.get('/laporan/sum-pengeluaran-kas', controllerLaporan.sumPengeluaranKas);
 router.post('/laporan-pemasukan', controllerLaporan.getPemasukanRangeDate);
 router.post('/laporan-pengeluaran', controllerLaporan.getPengeluaranRangeDate);
 router.post('/laporan-penjualan', controllerLaporan.getPenjualanRangeDate);
+router.post(
+  '/laporan-penjualan/total-penjualan',
+  controllerLaporan.getTotalPenjualanRangeDate
+);
+router.post(
+  '/laporan-pemasukan/total-pemasukan',
+  controllerLaporan.getTotalPemasukanRangeDate
+);
+router.post(
+  '/laporan-pengeluaran/total-pengeluaran',
+  controllerLaporan.getTotalPengeluaranRangeDate
+);
+router.get('/laporan-penjualan', controllerLaporan.sumPenjualan);
 router.post('/sign-up', controllerUser.signupUser);
+// router.post('/login', controllerUser.loginUser);
 router.post('/login', controllerUser.loginUser);
+router.get('/api/auth/user', controllerUser.getUsers);
 
 module.exports = router;

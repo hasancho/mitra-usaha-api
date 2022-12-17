@@ -19,11 +19,13 @@ const addDataPenjualan = (req, res) => {
     no_do,
     quantity,
     pembayaran,
-    total_biaya,
+    penjualan_sebelum_pajak,
     id_customer,
     id_pengiriman,
     id_kendaraan,
-    id_karyawan,
+    tanggal,
+    status_pajak,
+    penjualan_sesudah_pajak
   } = req.body;
 
   pool
@@ -31,11 +33,13 @@ const addDataPenjualan = (req, res) => {
       no_do,
       quantity,
       pembayaran,
-      total_biaya,
+      penjualan_sebelum_pajak,
       id_customer,
       id_pengiriman,
       id_kendaraan,
-      id_karyawan,
+      tanggal,
+      status_pajak,
+      penjualan_sesudah_pajak
     ])
     .then((result) => {
       console.log(result);
@@ -56,11 +60,13 @@ const updateDataPenjualan = (req, res) => {
     no_do,
     quantity,
     pembayaran,
-    total_biaya,
+    penjualan_sebelum_pajak,
     id_customer,
     id_pengiriman,
     id_kendaraan,
-    id_karyawan,
+    tanggal,
+    status_pajak,
+    penjualan_sesudah_pajak,
     id,
   } = req.body;
 
@@ -69,11 +75,13 @@ const updateDataPenjualan = (req, res) => {
       no_do,
       quantity,
       pembayaran,
-      total_biaya,
+      penjualan_sebelum_pajak,
       id_customer,
       id_pengiriman,
       id_kendaraan,
-      id_karyawan,
+      tanggal,
+      status_pajak,
+      penjualan_sesudah_pajak,
       id,
     ])
     .then((result) => {

@@ -16,6 +16,7 @@ const getDataKendaraan = (req, res) => {
 
 const addDataKendaraan = (req, res) => {
   const {
+    kode_jo,
     no_pol,
     tahun,
     jenis,
@@ -28,6 +29,7 @@ const addDataKendaraan = (req, res) => {
   } = req.body;
   pool
     .query(queryKendaraan.insertDataKendaraan, [
+      kode_jo,
       no_pol,
       tahun,
       jenis,
@@ -53,6 +55,7 @@ const addDataKendaraan = (req, res) => {
 const updateDataKendaraan = (req, res) => {
   const {
     id,
+    kode_jo,
     no_pol,
     tahun,
     jenis,
@@ -65,6 +68,7 @@ const updateDataKendaraan = (req, res) => {
   } = req.body;
   pool
     .query(queryKendaraan.updateDataKendaraan, [
+      kode_jo,
       no_pol,
       tahun,
       jenis,

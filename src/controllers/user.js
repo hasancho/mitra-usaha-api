@@ -51,6 +51,8 @@ const loginUser = async (req, res) => {
       username: usernameValue,
     });
 
+    console.log(generatedToken.token);
+
     res.status(200).json({
       message: 'Logged successfully',
       token: generatedToken,
@@ -61,4 +63,15 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { signupUser, loginUser };
+const getUsers = (req, res) => {
+  pool
+    .query('SELECT * From Users')
+    .then((result) => {
+      return res.status(200).json(result.rows);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err.message });
+    });
+};
+
+module.exports = { signupUser, loginUser, getUsers };
