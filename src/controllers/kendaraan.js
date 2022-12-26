@@ -54,7 +54,6 @@ const addDataKendaraan = (req, res) => {
 
 const updateDataKendaraan = (req, res) => {
   const {
-    id,
     kode_jo,
     no_pol,
     tahun,
@@ -65,6 +64,7 @@ const updateDataKendaraan = (req, res) => {
     masa_berlaku_stnk,
     masa_berlaku_pajak,
     masa_berlaku_kir,
+    id_kendaraan,
   } = req.body;
   pool
     .query(queryKendaraan.updateDataKendaraan, [
@@ -78,7 +78,7 @@ const updateDataKendaraan = (req, res) => {
       masa_berlaku_stnk,
       masa_berlaku_pajak,
       masa_berlaku_kir,
-      id,
+      id_kendaraan,
     ])
     .then((result) => {
       console.log(result);
@@ -93,9 +93,9 @@ const updateDataKendaraan = (req, res) => {
 };
 
 const deleteDataKendaraan = (req, res) => {
-  const { id } = req.params;
+  const { id_kendaraan } = req.params;
   pool
-    .query(queryKendaraan.deleteDataKendaraan, [id])
+    .query(queryKendaraan.deleteDataKendaraan, [id_kendaraan])
     .then((result) => {
       console.log(result);
       res.status(200).json({ message: 'successed to delete data kendaraan' });

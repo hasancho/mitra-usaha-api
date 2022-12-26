@@ -141,6 +141,29 @@ const getTotalPenjualanRangeDate = (req, res) => {
     });
 };
 
+const getTotalLabaRangeDate = (req, res) => {
+  const { from_tanggal, to_tanggal } = req.body;
+  pool
+    .query(
+      `select sum(penjualan_sebelum_pajak) as total_penjualan_sebelum_pajak, sum(biaya_pokok) as total_biaya_pokok, sum(penjualan_sebelum_pajak - biaya_pokok) as total_laba  From penjualan as p 
+      LEFT JOIN pengiriman
+        ON p.id_pengiriman = pengiriman.id_pengiriman
+        LEFT JOIN kendaraan
+        ON p.id_kendaraan = kendaraan.id_kendaraan
+    where 
+      tanggal >= $1 and  tanggal < $2`,
+      [from_tanggal, to_tanggal]
+    )
+    .then((result) => {
+      console.log(result);
+      return res.status(200).json(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({ message: 'Failed to get data' });
+    });
+};
+
 module.exports = {
   sumPenjualan,
   sumPemasukanKas,
@@ -152,4 +175,5 @@ module.exports = {
   getTotalPenjualanRangeDate,
   getTotalPemasukanRangeDate,
   getTotalPengeluaranRangeDate,
+  getTotalLabaRangeDate,
 };

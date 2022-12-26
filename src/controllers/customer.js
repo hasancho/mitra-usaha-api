@@ -15,9 +15,9 @@ const getDataCustomer = (req, res) => {
 };
 
 const getDataCustomerById = (req, res) => {
-  const { id } = req.params;
+  const { id_customer } = req.params;
   pool
-    .query(queryCustomer.getDataCustomerById, [id])
+    .query(queryCustomer.getDataCustomerById, [id_customer])
     .then((result) => {
       console.log(result);
       return res.status(200).json(result.rows);
@@ -49,14 +49,14 @@ const addDataCustomer = (req, res) => {
 };
 
 const updateDataCustomer = (req, res) => {
-  const { npwp, nama, alamat, no_telepon, id } = req.body;
+  const { npwp, nama, alamat, no_telepon, id_customer } = req.body;
   pool
     .query(queryCustomer.updateDataCustomer, [
       npwp,
       nama,
       alamat,
       no_telepon,
-      id,
+      id_customer,
     ])
     .then((result) => {
       console.log(result);
@@ -73,10 +73,10 @@ const updateDataCustomer = (req, res) => {
 };
 
 const deleteDataCustomer = (req, res) => {
-  const { id } = req.params;
+  const { id_customer } = req.params;
 
   pool
-    .query(queryCustomer.deleteDataCustomer, [id])
+    .query(queryCustomer.deleteDataCustomer, [id_customer])
     .then((result) => {
       return res.status(200).json({
         message: 'successed to delete customer',

@@ -35,7 +35,8 @@ const addDataPengiriman = (req, res) => {
 };
 
 const updateDataPengiriman = (req, res) => {
-  const { kode_tujuan, tujuan, tarif, biaya_pokok, komisi, id } = req.body;
+  const { kode_tujuan, tujuan, tarif, biaya_pokok, komisi, id_pengiriman } =
+    req.body;
   pool
     .query(queryPengiriman.updateDataPengiriman, [
       kode_tujuan,
@@ -43,7 +44,7 @@ const updateDataPengiriman = (req, res) => {
       tarif,
       biaya_pokok,
       komisi,
-      id,
+      id_pengiriman,
     ])
     .then((result) => {
       console.log(result);
@@ -56,9 +57,9 @@ const updateDataPengiriman = (req, res) => {
 };
 
 const deleteDataPengiriman = (req, res) => {
-  const { id } = req.params;
+  const { id_pengiriman } = req.params;
   pool
-    .query(queryPengiriman.deleteDataPengiriman, [id])
+    .query(queryPengiriman.deleteDataPengiriman, [id_pengiriman])
     .then((result) => {
       console.log(result);
       res.status(200).json({ message: 'successed to delete data pengiriman' });
