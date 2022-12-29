@@ -155,5 +155,6 @@ router.post('/sign-up', controllerUser.signupUser);
 // router.post('/login', controllerUser.loginUser);
 router.post('/login', controllerUser.loginUser);
 router.get('/api/auth/user', controllerUser.getUsers);
+router.get('/api/auth/profile', controllerUser.getProfileUser);
 
 module.exports = router;
